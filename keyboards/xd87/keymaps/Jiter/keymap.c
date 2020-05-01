@@ -24,13 +24,15 @@ enum custom_keycodes {
 };
 
 
-#define _BL 0
-#define _FL 1
-#define _CL 2
-#define _TL 3
-#define _KL 4
+#define _BL 0 // BaseLayer
+#define _NL 1 // Neo2Layer
+
+#define _FL 3 // FunctionLayer
+
+#define _TL 5 // TransparentLayer as Template
 
 /*
+Keycount per Row
 Keys 1 - 16
 Keys 2 - 17
 Keys 3 - 17
@@ -42,15 +44,23 @@ Keys 6 - 12
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BL] = LAYOUT_tkl_ansisplit(\
       KC_ESC, KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,  KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11, KC_F12,            KC_PSCR, KC_SLCK, KC_PAUS, \
-      KC_GRV, KC_1,   KC_2,   KC_3,   KC_4,   KC_5,   KC_6,   KC_7,   KC_8,   KC_9,   KC_0,   KC_MINS,KC_EQL, KC_BSPC,   KC_INS,  KC_HOME, KC_PGUP, \
-      KC_TAB, KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,   KC_LBRC,KC_RBRC,KC_BSLS,   KC_DEL,  KC_END,  KC_PGDN, \
-      KC_CAPS,KC_A,   KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,   KC_L,   KC_SCLN,KC_QUOT,        KC_ENT, \
-      KC_LSFT,KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM,KC_DOT, KC_SLSH,                KC_RSFT,            KC_UP, \
+      KC_CIRC,DE_1,   DE_2,   DE_3,   DE_4,   DE_5,   DE_6,   DE_7,   DE_8,   DE_9,   DE_0,   DE_SS,  DE_ACUT,KC_BSPC,   KC_INS,  KC_HOME, KC_PGUP, \
+      KC_TAB, DE_Q,   DE_W,   DE_E,   DE_R,   DE_T,   DE_Z,   DE_U,   DE_I,   DE_O,   DE_P,   DE_UDIA,DE_PLUS,DE_HASH,   KC_DEL,  KC_END,  KC_PGDN, \
+      KC_CAPS,DE_A,   DE_S,   DE_D,   DE_F,   DE_G,   DE_H,   DE_J,   DE_K,   DE_L,   DE_ODIA,DE_ADIA,        KC_ENT, \
+      KC_LSFT,DE_Y,   DE_X,   DE_C,   DE_V,   DE_B,   DE_N,   DE_M,   DE_COMM,DE_DOT, DE_MINS,                KC_RSFT,            KC_UP, \
       KC_LCTL,KC_LGUI,KC_LALT,        KC_SPC,         KC_SPC,                         KC_RALT,KC_RGUI,MO(_FL),KC_RCTL,   KC_LEFT, KC_DOWN, KC_RGHT  ),
+
+  [_NL] = LAYOUT_tkl_ansisplit(\
+      KC_TRNS,        KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, \
+      DE_CIRC, DE_1,   DE_2,   DE_3,   DE_4,   DE_5,   DE_6,   DE_7,   DE_8,   DE_9,   DE_0,   DE_MINS,DE_GRV ,KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, \
+      KC_TRNS,DE_X,   DE_V,   DE_L,   DE_C,   DE_W,   DE_K,   DE_H,   DE_G,   DE_F,   DE_Q,   DE_SS,  KC_TRNS,KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, \
+      KC_TRNS,DE_U,   DE_I,   DE_A,   DE_E,   DE_O,   DE_S,   DE_N,   DE_R,   DE_T,   DE_D,   DE_Y,           KC_TRNS, \
+      KC_TRNS,        DE_UDIA,DE_ODIA,DE_ADIA,DE_P,   DE_Z,   DE_B,   DE_M,   DE_COMM,DE_DOT, DE_J,           KC_TRNS,            KC_TRNS,\
+      KC_TRNS,KC_TRNS,KC_TRNS,        KC_TRNS,         KC_TRNS,                       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS  ),
 
   [_FL] = LAYOUT_tkl_ansisplit(\
       KC_TRNS,        KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, \
-      KC_TRNS,DF(_BL),KC_TRNS,KC_TRNS,DF(_KL),KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,   RGB_TOG, RGB_VAI, RGB_VAD, \
+      KC_TRNS,DF(_BL),DF(_NL),KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,   RGB_TOG, RGB_VAI, RGB_VAD, \
       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,   BL_TOGG, BL_INC , BL_DEC , \
       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,        KC_TRNS, \
       KC_TRNS,        KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,        KC_TRNS,            RGB_MOD	,\
@@ -62,15 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, \
       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,        KC_TRNS, \
       KC_TRNS,        KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,        KC_TRNS,            KC_TRNS,\
-      KC_TRNS,KC_TRNS,KC_TRNS,        KC_TRNS,         KC_TRNS,                       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS  ),
-
-	[_KL] = LAYOUT_all(\
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,\
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,\
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_K, KC_DOT, KC_O, KC_COMM, KC_Y, KC_V, KC_G, KC_C, KC_L, KC_LBRC, KC_Z, KC_TRNS, KC_TRNS, KC_TRNS,\
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_H, KC_A, KC_E, KC_I, KC_U, KC_D, KC_T, KC_R, KC_N, KC_S, KC_F, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_X,\
-      KC_Q, KC_QUOT, KC_SCLN, KC_GRV, KC_B, KC_P, KC_W, KC_M, KC_J, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,\
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS) 
+      KC_TRNS,KC_TRNS,KC_TRNS,        KC_TRNS,         KC_TRNS,                       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS  )
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
