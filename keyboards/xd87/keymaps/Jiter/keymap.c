@@ -14,13 +14,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
-
 #include "jiter.h"
 
 // Defines the keycodes used by our macros in process_record_user
 enum custom_keycodes {
-  QMKBEST = SAFE_RANGE,
-  QMKURL
+  MY_PASS = SAFE_RANGE,
+  MY_DOT
 };
 
 
@@ -64,8 +63,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TRNS,DF(_BL),DF(_NL),KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,   RGB_TOG, KC_TRNS, KC_TRNS, \
       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, \
       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,        KC_TRNS, \
-      KC_TRNS,        KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,        KC_TRNS,            KC_TRNS,\
-      KC_TRNS,KC_TRNS,KC_TRNS,        QMKBEST,         KC_TRNS,                       KC_TRNS,KC_TRNS,KC_TRNS,RESET,     KC_TRNS, KC_TRNS, KC_TRNS  ),
+      KC_TRNS,        KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,MY_PASS,        KC_TRNS,            KC_TRNS,\
+      KC_TRNS,KC_TRNS,KC_TRNS,        KC_TRNS,         KC_TRNS,                       KC_TRNS,KC_TRNS,KC_TRNS,RESET,     KC_TRNS, KC_TRNS, KC_TRNS  ),
 
   [_TL] = LAYOUT_tkl_ansisplit(\
       KC_TRNS,        KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, \
@@ -77,26 +76,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
   switch (keycode) {
-    case QMKBEST:
-      if (record->event.pressed) {
-        // when keycode QMKBEST is pressed
-        SEND_STRING("QMK is the best thing ever!");
+    case MY_PASS:
+      if(record->event.pressed) {
+        //when pressed
+        SEND_STRING("Mzpasswordisthesafest!\n");
       } else {
-        // when keycode QMKBEST is released
+
       }
-      break;
-    case QMKURL:
-      if (record->event.pressed) {
-        // when keycode QMKURL is pressed
-        SEND_STRING("https://qmk.fm/" SS_TAP(X_ENTER));
-      } else {
-        // when keycode QMKURL is released
-      }
-      break;
+    break;
+
   }
+
   return true;
 }
+
+//  return true;
+//}
 
 void matrix_init_user(void) {
 
@@ -113,7 +110,9 @@ void led_set_user(uint8_t usb_led) {
 void keyboard_post_init_user(void) {
   // Customise these values to desired behaviour
   debug_enable=true;
-  debug_matrix=true;
+  //debug_matrix=true;
   //debug_keyboard=true;
   //debug_mouse=true;
+  rgb_change_color(HSV_GREEN);
+
 }
