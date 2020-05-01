@@ -16,13 +16,6 @@
 #include QMK_KEYBOARD_H
 #include "jiter.h"
 
-// Defines the keycodes used by our macros in process_record_user
-enum custom_keycodes {
-  MY_PASS = SAFE_RANGE,
-  MY_DOT
-};
-
-
 #define _BL 0 // BaseLayer
 #define _NL 1 // Neo2Layer
 
@@ -47,12 +40,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       DE_CIRC,DE_1,   DE_2,   DE_3,   DE_4,   DE_5,   DE_6,   DE_7,   DE_8,   DE_9,   DE_0,   DE_SS,  DE_ACUT,KC_BSPC,   KC_INS,  KC_HOME, KC_PGUP, \
       KC_TAB, DE_Q,   DE_W,   DE_E,   DE_R,   DE_T,   DE_Z,   DE_U,   DE_I,   DE_O,   DE_P,   DE_UDIA,DE_PLUS,DE_HASH,   KC_DEL,  KC_END,  KC_PGDN, \
       KC_CAPS,DE_A,   DE_S,   DE_D,   DE_F,   DE_G,   DE_H,   DE_J,   DE_K,   DE_L,   DE_ODIA,DE_ADIA,        KC_ENT, \
-      KC_LSFT,DE_Y,   DE_X,   DE_C,   DE_V,   DE_B,   DE_N,   DE_M,   DE_COMM,DE_DOT, DE_MINS,                KC_RSFT,            KC_UP, \
+      CU_LSFT,DE_Y,   DE_X,   DE_C,   DE_V,   DE_B,   DE_N,   DE_M,   DE_COMM,DE_DOT, DE_MINS,                CU_RSFT,            KC_UP, \
       KC_LCTL,KC_LGUI,KC_LALT,        KC_SPC,         KC_SPC,                         KC_RALT,KC_RGUI,MO(_FL),KC_RCTL,   KC_LEFT, KC_DOWN, KC_RGHT  ),
   //Neo2Layer
   [_NL] = LAYOUT_tkl_ansisplit(\
       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,           KC_TRNS, KC_TRNS, KC_TRNS, \
-      DE_CIRC,DE_1,   DE_2,   DE_3,   DE_4,   DE_5,   DE_6,   DE_7,   DE_8,   DE_9,   DE_0,   DE_MINS,DE_GRV ,KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, \
+      DE_CIRC,DE_1,   NEO_2,  DE_3,   DE_4,   DE_5,   DE_6,   DE_7,   DE_8,   DE_9,   DE_0,   DE_MINS,DE_GRV ,KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, \
       KC_TRNS,DE_X,   DE_V,   DE_L,   DE_C,   DE_W,   DE_K,   DE_H,   DE_G,   DE_F,   DE_Q,   DE_SS,  DE_ACUT,KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, \
       KC_TRNS,DE_U,   DE_I,   DE_A,   DE_E,   DE_O,   DE_S,   DE_N,   DE_R,   DE_T,   DE_D,   DE_Y,           KC_TRNS, \
       KC_TRNS,        DE_UDIA,DE_ODIA,DE_ADIA,DE_P,   DE_Z,   DE_B,   DE_M,   DE_COMM,DE_DOT, DE_J,           KC_TRNS,            KC_TRNS,\
@@ -75,22 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TRNS,KC_TRNS,KC_TRNS,        KC_TRNS,         KC_TRNS,                       KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS  )
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
-  switch (keycode) {
-    case MY_PASS:
-      if(record->event.pressed) {
-        //when pressed
-        SEND_STRING("Mzpasswordisthesafest!\n");
-      } else {
-
-      }
-    break;
-
-  }
-
-  return true;
-}
 
 //  return true;
 //}
