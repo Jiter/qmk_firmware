@@ -17,11 +17,21 @@ CU_RSFT,
 CU_GAME, 
 CU_NAV,
 
-NEO_2
+NEO_1_1,
+NEO_1_2,
+NEO_1_3,
+NEO_1_4,
+NEO_1_5,
+NEO_1_6,
+NEO_1_7,
+NEO_1_8,
+NEO_1_9,
+NEO_1_0,
 
 };
 
 #ifdef NEO2_ENABLE
+
 extern bool     lshift;
 extern bool     rshift;
 
@@ -176,6 +186,28 @@ Templates for Keys, with custom shifted and non shifted Characters
         }                           \
         unregister_code(KC_ALGR);   \
     }                               \
+    return false;
+
+// Inverted shift status
+#define SHIFT_NORMALGR(kc1, kc2)      \
+    if (record->event.pressed) {      \
+        timer_timeout();              \
+        if (lshift || rshift) {       \
+            register_code(KC_ALGR);   \
+            unregister_code(KC_LSFT); \
+            unregister_code(kc2);     \
+            register_code(kc2);       \
+            add_to_prev(kc2);         \
+        } else {                      \
+            unregister_code(KC_LSFT); \
+            unregister_code(kc1);     \
+            register_code(kc1);       \
+        }                             \
+    } else {                          \
+        unregister_code(kc1);         \
+        unregister_code(kc2);         \
+        unregister_code(KC_ALGR);     \
+    }                                 \
     return false;
 
 // Different keycode when Ctrl is pressed

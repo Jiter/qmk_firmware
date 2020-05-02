@@ -54,6 +54,7 @@ void unreg_prev(void) {
     }
     prev_indx = 0;
 }
+
 #endif
 
 // Interrupt and times for Nav/Esc
@@ -137,9 +138,49 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
 
-    case NEO_2:
+
+
+    case NEO_1_1:
+        SHIFT_NORM(DE_1, DE_CIRC);
+    return true;
+    
+    case NEO_1_2:
         SHIFT_NORM(DE_2, DE_3);
     return true;
+
+    case NEO_1_3:
+        SHIFT_NORM(DE_3, DE_3);
+    return true;
+
+    case NEO_1_4:
+        SHIFT_NORM(DE_4, DE_4);
+    return true;
+    
+    case NEO_1_5:
+        SHIFT_NORM(DE_5, DE_5);
+    return true;
+
+    case NEO_1_6:
+        SHIFT_NORM(DE_6, DE_4);
+    return true;
+
+    case NEO_1_7:
+        SHIFT_NORMALGR(DE_7, DE_E);
+    return true;
+
+    case NEO_1_8:
+        SHIFT_NO(DE_8, DE_8);
+    return true;
+
+    case NEO_1_9:
+        SHIFT_NO(DE_9, DE_E);
+    return true;
+
+    case NEO_1_0:
+        SHIFT_NO(DE_0, DE_0);
+    return true;
+
+
 #endif
 
     // Turn RGB Red when going to Bootloader
